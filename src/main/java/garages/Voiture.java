@@ -41,10 +41,18 @@ public class Voiture {
 	 * @throws java.lang.Exception si la voiture n'est pas dans un garage
 	 */
 	public void sortDuGarage() throws Exception {
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 		// TODO: Implémenter cette méthode
 		// Trouver le dernier stationnement de la voiture
 		// Terminer ce stationnement
+		if(!estDansUnGarage()){
+			throw new UnsupportedOperationException("Erreur la voiture n'est pas dans un garage");
+		}else{
+			for(Stationnement s : myStationnements){
+				s.terminer();
+			}
+
+		}
 	}
 
 	/**
@@ -52,7 +60,16 @@ public class Voiture {
 	 */
 	public Set<Garage> garagesVisites() {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		Set<Garage> garage = new HashSet<>();
+		for(Stationnement s : myStationnements){
+			
+			if(s.getCar()==this){
+				garage.add(s.getGarage());
+			}
+		}
+			
+		return garage;
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 	}
 
 	/**
@@ -60,7 +77,14 @@ public class Voiture {
 	 */
 	public boolean estDansUnGarage() {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		for(Stationnement s : myStationnements){
+			
+			if(s.estEnCours()==true){
+				
+				return true;
+			}
+		}return false;
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 		// Vrai si le dernier stationnement est en cours
 	}
 
@@ -83,7 +107,17 @@ public class Voiture {
 	public void imprimeStationnements(PrintStream out) {
 		// TODO: Implémenter cette méthode
 		// Utiliser les méthodes toString() de Garage et Stationnement
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
+		for(Garage g : garagesVisites()){
+			out.println(g.toString());
+			for(Stationnement s : myStationnements){
+				if(s.getGarage().equals(g)){
+					out.println(s.toString());
+				}
+			}
+		}
 	}
 
-}
+	}
+
+
